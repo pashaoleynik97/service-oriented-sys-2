@@ -1,23 +1,19 @@
-FROM gradle:8.1.1-jdk17 as builder
-
-# Create app directory
+FROM openjdk:17-jdk-slim
 WORKDIR /app
 
-# Clone the GitHub project
-RUN git clone https://github.com/pashaoleynik97/service-oriented-sys-2.git .
+# Install git and necessary tools
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    jq \
+    nano \
+    && apt-get clean
 
-# Build the project
-RUN gradle build --no-daemon
-
-# Final lightweight image
-FROM openjdk:17-slim
-WORKDIR /app
-
-# Copy built jar
-COPY --from=builder /app/build/libs/*.jar app.jar
-
-# Add entrypoint
+# Copy the entrypoint script
 COPY entrypoint.sh .
+
+# Make the script executable
 RUN chmod +x entrypoint.sh
 
+# Set entrypoint
 ENTRYPOINT ["./entrypoint.sh"]
