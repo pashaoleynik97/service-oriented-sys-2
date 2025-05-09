@@ -15,8 +15,8 @@ services:
     ports:
       - "8082:8080"
     networks:
-      - shared-network
+      - spring-lab-network
 
 networks:
-  shared-network:
+  spring-lab-network:
     external: true
