@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  orderservice:
+    build: .
+    container_name: orderservice
+    depends_on:
+      - postgres-db
+    environment:
+      ORDER_DB_HOST: postgres-db
+      ORDER_DB_PORT: 5432
+      ORDER_DB_USER: admin
+      ORDER_DB_PASSWORD: admin
+      ORDER_DB_NAME: orderdb
+    ports:
+      - "8082:8080"
+    networks:
+      - shared-network
+
+networks:
+  shared-network:
+    external: true
