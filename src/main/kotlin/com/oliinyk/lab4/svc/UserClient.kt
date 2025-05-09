@@ -9,7 +9,7 @@ class UserClient(
     private val restTemplate: RestTemplate
 ) {
     fun getUser(userId: Long): UserDTO? {
-        val url = "http://userservice:8081/users/$userId"
+        val url = "http://lab1-container:8081/users/$userId"
         return restTemplate.getForObject(url, UserDTO::class.java)
     }
 }
