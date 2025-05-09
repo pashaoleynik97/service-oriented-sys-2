@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     jq \
     nano \
+    postgresql-client \
     && apt-get clean
 
 # Copy the entrypoint script
