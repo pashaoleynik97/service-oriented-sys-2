@@ -4,8 +4,6 @@ services:
   orderservice:
     build: .
     container_name: orderservice
-    depends_on:
-      - postgres-db
     environment:
       ORDER_DB_HOST: postgres-db
       ORDER_DB_PORT: 5432
